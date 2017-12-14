@@ -146,7 +146,13 @@ public class DeviceControlActivity extends AppCompatActivity {
                             mNotifyCharacteristic = characteristic;
                             mBluetoothLeService.setCharacteristicNotification(
                                     characteristic, true);
+                            //GATT_Notification：从机直接发送给主机。
                             Log.i(TAG, "charaProp PROPERTY_NOTIFY" );
+                        }
+                        if ((charaProp | BluetoothGattCharacteristic.PROPERTY_INDICATE) > 0){
+                            //GATT_Indication：从机通知主机后，主机需要调用simpleprofile_writeattrcb，读取从机的数据。
+                            //GATT_Indication和GATT_Notification的区别就在于主机是否回确认信息。
+                            Log.i(TAG, "charaProp PROPERTY_INDICATE" );
                         }
                         //某BLE模块的写 charaProp 为 12
                         if (((charaProp | BluetoothGattCharacteristic.PROPERTY_WRITE) > 0) ||
