@@ -149,9 +149,9 @@ public class DeviceControlActivity extends AppCompatActivity {
                             Log.i(TAG, "charaProp PROPERTY_NOTIFY" );
                         }
                         //某BLE模块的写 charaProp 为 12
-                        if (charaProp == BluetoothGattCharacteristic.PROPERTY_WRITE ||
-                                charaProp == BluetoothGattCharacteristic.PROPERTY_WRITE_NO_RESPONSE ||
-                                charaProp == 12) {
+                        if (((charaProp | BluetoothGattCharacteristic.PROPERTY_WRITE) > 0) ||
+                            ((charaProp | BluetoothGattCharacteristic.PROPERTY_WRITE_NO_RESPONSE) > 0) ||
+                            charaProp == 12) {
                             Log.i(TAG, "charaProp PROPERTY_WRITE" );
                             //随便写一个字符串
                             characteristic.setValue("android ping ble.\n".getBytes());
